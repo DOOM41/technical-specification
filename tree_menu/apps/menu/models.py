@@ -9,17 +9,23 @@ from django.db.models import QuerySet
 
 
 class MenuManager(Manager):
-    def get_menu_and_submenu_items(self, name: str = '') -> dict:
+    def get_menu_and_submenu_items(self, name: str) -> dict:
+        # Check name for some data
         if not name:
-            menu: QuerySet[Menu] = Menu.objects.all()
             sub_menu: QuerySet[SubMenu] = SubMenu.objects.all()
         else:
-            menu: QuerySet[Menu] = Menu.objects.filter(name=name)
-            sub_menu: QuerySet[SubMenu] = SubMenu.objects.filter(menu=menu.first())
+            sub_menu: QuerySet[SubMenu] = SubMenu.objects.filter(
+                menu__name=name
+            )
+        # Make result dict 
         result = {}
-        for menu_item in menu:
-            result[menu_item] = sub_menu.filter(menu=menu_item)
-        return result
+        for menu_item in sub_menu:
+            result[menu_item.menu.name] = sub_menu.filter(
+                menu__name=menu_item.menu.name
+            )
+        # Sort data 
+        sorted_dict = dict(sorted(result.items()))
+        return sorted_dict
 
 
 class Menu(Model):

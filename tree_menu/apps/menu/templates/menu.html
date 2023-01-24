@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    {% block menu %}
     <ul>
         {% for menu_item,value in data.items %}
 
@@ -22,6 +23,7 @@
         </li>
         {% endfor %}
     </ul>
+    {% endblock %}
 </body>
 
 </html>

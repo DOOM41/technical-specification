@@ -11,15 +11,16 @@ from menu.models import Menu
 
 class MenuView(View):
     template_name: str = 'menu.html'
-    content_type: str = 'text/html'
 
     def get(self, request: WSGIRequest, menu_name):
         template: Template = loader.get_template(
             self.template_name
         )
+        # for all data
         if menu_name == 'all':
             menu_name = ''
-        data: dict = Menu.objects.get_menu_and_submenu_items(menu_name)
+        data: dict = \
+            Menu.objects.get_menu_and_submenu_items(menu_name)
         if not data:
             raise Http404
         return HttpResponse(
@@ -27,5 +28,5 @@ class MenuView(View):
                 context={'data': data},
                 request=request,
             ),
-            content_type=self.content_type
+            content_type='text/html'
         )

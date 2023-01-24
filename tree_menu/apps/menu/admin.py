@@ -9,6 +9,7 @@ class MenuAdmin(admin.ModelAdmin):
         'name',
     )
     list_filter = (
+        'id',
         'name',
     )
 
