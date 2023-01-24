@@ -21,7 +21,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-PROJ_APPS= [
+PROJ_APPS = [
     'menu.apps.MenuConfig'
 ]
 
@@ -51,6 +51,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'draw_menu_tag': 'menu.templatetags.draw_menu_tag',
+            }
         },
     },
 ]

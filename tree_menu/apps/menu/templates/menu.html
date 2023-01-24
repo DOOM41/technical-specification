@@ -1,3 +1,4 @@
+{% load draw_menu_tag %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +10,7 @@
 </head>
 
 <body>
+    {% draw_menu "" as data %}
     {% block menu %}
     <ul>
         {% for menu_item,value in data.items %}
@@ -24,6 +26,7 @@
         {% endfor %}
     </ul>
     {% endblock %}
+    {% draw_menu "Aday" as else_data %}
 </body>
 
 </html>
