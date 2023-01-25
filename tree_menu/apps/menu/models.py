@@ -17,7 +17,7 @@ class MenuManager(Manager):
 
         else:
             sub_menu: QuerySet[SubMenu] = SubMenu.objects.select_related(
-                'menu').filter(name=name)
+                'menu').filter(menu__name=name)
 
         # Make result dict
         result = {}
